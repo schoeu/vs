@@ -3,7 +3,11 @@ block headArea
     link(rel='stylesheet', href='/stylesheets/index.css')
 block content
   div(class='wrap')
-      div(class='left')
-          h1 schoeu
-      div(class='right')
-          h1 viki
+      div(class='leftPart')
+          a(href='/user/schoeu')
+            h1 schoeu
+      div(class='rightPart')
+          a(href='/user/viki')
+            h1 viki
+block jsArea
+    script(src='/javascripts/page/index.js')

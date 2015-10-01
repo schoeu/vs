@@ -1,0 +1,17 @@
+//
+   Created by baidu on 15/10/1.
+
+extends layout
+block headArea
+    link(rel='stylesheet', href='/stylesheets/login.css')
+block content
+    h1 请登录
+    form(action='/user/login' method='post')
+        div
+            input(type='text' name='username' placeholder='请输入用户名' id='username')
+        div
+            input(type='password' name='password' id='password')
+        div
+            button(type='submit') 登录
+block jsArea
+    script(src='/javascripts/page/login.js')
