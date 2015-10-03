@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+var Conn = require('../models/usersModel.js');
+
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
@@ -23,7 +25,25 @@ router.get('/login', function (req, res) {
 
 // 登录
 router.post('/login', function (req, res) {
-    res.send('已登录');
+    Conn.connect();
+    var username = req.body.username || '';
+    var password = req.body.password || '';
+    Conn.query("select password from users where username = '"+ username +"'", function (err, rs) {
+        if (err) {
+            console.log(err);
+            res.render('error', {});
+        }
+        var dbPassword = rs[0].password;
+
+        if (dbPassword === password) {
+            res.send('登录成功');
+        }
+        else {
+            res.send('用户名或密码错误！');
+        }
+
+    })
+
 });
 
 module.exports = router;
