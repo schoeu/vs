@@ -1,0 +1,64 @@
+//
+   Created by baidu on 15/10/3.
+extends layout
+block headArea
+    link(rel='stylesheet', href='/stylesheets/infoSubmit.css')
+block content
+    form(action='/articles/submit' method='post' enctype='multipart/form-data')
+        div
+            label(for='artName') 作品名称
+            input(name='artName' id='artName' placeholder='请输入作品名称' type='text')
+        div
+            label(for='artPartf') 作品分类
+            select(name='artPartf' id='artPartf')
+                option(value=0) 请选择一级分类
+                option(value=1) 图片
+                option(value=2) 视频
+                option(value=3) 音频
+            select(name='artParts')
+                option(value=0) 请选择二级分类
+                option(value=1) 文字
+                option(value=2) 文字
+                option(value=3) 文字
+        div
+            label(for='artDes') 作品说明
+            textarea(name='artDes' id='artDes' placeholder='请输入作品说明' type='text')
+        div
+            label(for='uploadImg') 上传图片
+            input(name='uploadImg' id='uploadImg' type='file' multiple='true')
+        div
+            label(for='selfcolors') 个性配色
+            select(name='selfCor' id='selfcolors')
+                option(value='white') 背景颜色：白色
+                option(value='black') 背景颜色：黑色
+                option(value='blue') 背景颜色：蓝色
+            select(name='fontColor')
+                option(value='white') 文字颜色：白色
+                option(value='black') 文字颜色：黑色
+                option(value='blue') 文字颜色：蓝色
+        div
+            label(for='artiToos') 创作装备
+            input(type='text' id='artiToos' name='artiToos')
+        div
+            label(for='part') 自定义分类
+            select(id='part' name='part')
+                option(value='0') 0
+                option(value='1') 1
+        div
+            label(for='partment') 插入附件
+            input(type='file' value='上传压缩包' id='partment' name='zips')
+            input(type='file' value='上传Flash' name='flashes')
+            input(type='file' value='插入视频' name='videos')
+        div
+            label(for='createdate')
+            input(type='date' id='createdate' name='createdate')
+        div
+            label(for='islock') 防盗设置
+            input(type='checkbox' id='islock' name='islock')
+            span 图片禁止右键另存为
+        div
+            label(for='artiaccredit')
+            input(type='text' id='artiaccredit' name='artiaccredit' placeholder='禁止匿名转载，禁止商业使用；禁止个人使用')
+        input(type='submit' value='确定')
+block jsArea
+    script(src='/javascripts/page/infoSubmit.js')
