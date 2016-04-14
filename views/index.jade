@@ -1,13 +1,17 @@
 extends layout
-block headArea
-    link(rel='stylesheet', href='/stylesheets/index.css')
+
 block content
-  div(class='wrap')
-      div(class='leftPart')
-          a(href='/user/schoeu')
-            h1 schoeu
-      div(class='rightPart')
-          a(href='/user/viki')
-            h1 viki
-block jsArea
-    script(src='/javascripts/page/index.js')
+  form(action='/login' method='POST')
+    lable(for='username') 用户
+    input(type='text' name='username' id='username')
+
+    lable(for='password') 密码
+    input(type='text' name='password' id='password')
+
+    input(type='submit' value='确认' id='submit')
+
+  a(href='/users/aboutme') 关于我
+
+  a(href='/users/pinfo') 编辑个人信息
+
+
