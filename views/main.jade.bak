@@ -124,22 +124,54 @@ block content
                     input(type='button' value='登录' id='vs_login_submit')
 
 
-
 block bodybottom
     script(src='/javascripts/j220.min.js')
-    script(src='/javascripts/react.min.js')
-    script(src='/javascripts/react-dom.min.js')
-    script(src='/javascripts/react-bootstrap.min.js')
-    script(src='/javascripts/browser.min.js')
-    script(type='text/babel').
-
-        var button = ReactBootstrap.Button({
-            bsStyle: "success",
-            bsSize: "large",
-            children: "Register"
+    script.
+        var $shadowEle = $('.vs_login_shadow');
+        var $vsLogin = $('.vs_login');
+        $vsLogin.on('click', function () {
+            $shadowEle.show().addClass('vs_login_show');
         });
 
-        React.render(button, document.querySelector('.vs_title'));
+        $('.vs_hd_mn').hover(function (e) {
+            $(this).find('.vs_hd_menu').show().addClass('vs_login_show');
+        }).on('mouseleave', function (e) {
+            $(this).find('.vs_hd_menu').removeClass('vs_login_show').hide();
+        });
 
+        $('#vs_login_submit').on('click', function () {
+            var $submitEle = $(this);
+            var uname = $('#username').val();
+            var $pwd = $('#password');
+            var pwdText = $pwd.val();
 
-
+            if (!uname || !pwdText) {
+                $pwd.attr('placeholder', '用户名或密码错误').val('');
+            }
+            else {
+                $submitEle.attr('disabled', 'disabled');
+                $.ajax({
+                    type: 'post',
+                    url: '/login',
+                    data: {
+                        username: uname,
+                        password: pwdText
+                    }
+                }).done(function (rs) {
+                    if (rs && rs.status === 0) {
+                        var data = rs.data;
+                        // 登录成功
+                        if (data.logined) {
+                            $shadowEle.removeClass('vs_login_show').hide();
+                            $vsLogin.find('span').text(data.username);
+                        }
+                        // 用户名或密码错误
+                        else {
+                            $pwd.attr('placeholder', '用户名或密码错误').val('');
+                        }
+                    }
+                }).always(function (){
+                    $submitEle.removeAttr('disabled');
+                });
+            }
+        });
