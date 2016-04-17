@@ -29,3 +29,4 @@ node_modules
 #project
 .idea
 
+conn.js
